@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en" data-theme="auto" data-js="off">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffd166" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141821" media="(prefers-color-scheme: dark)" />
+    <title>SmileWeb — smile at your camera, get a joke</title>
+    <meta
+      name="description"
+      content="SmileWeb uses your webcam to notice when you smile and rewards you with a fresh joke. 10,000 family-friendly jokes, fully on-device and private."
+    />
+    <meta name="author" content="SmileWeb" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://smileweb.example/" />
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/icon-192.png" />
+    <link rel="manifest" href="assets/manifest.webmanifest" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="dns-prefetch" href="https://storage.googleapis.com" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "SmileWeb",
+        "applicationCategory": "EntertainmentApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript and a webcam for smile detection",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "SmileWeb notices when you smile through your webcam and answers every smile with a fresh, family-friendly joke. Everything runs on your device."
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="brand" href="#main" aria-label="SmileWeb home">
+          <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+            <circle cx="24" cy="24" r="21" />
+            <path class="brand__eyes" d="M15 19a2.6 2.6 0 1 0 5.2 0 2.6 2.6 0 1 0-5.2 0Z" />
+            <path class="brand__eyes" d="M27.8 19a2.6 2.6 0 1 0 5.2 0 2.6 2.6 0 1 0-5.2 0Z" />
+            <path class="brand__smile" d="M14 28c3.4 5.6 16.6 5.6 20 0" />
+          </svg>
+          <span class="brand__name">Smile<strong>Web</strong></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="site-nav__list">
+            <li><a href="#smile-station">Mirror</a></li>
+            <li><a href="#joke-stage">Joke</a></li>
+            <li><a href="#browse">Browse</a></li>
+            <li><a href="#stats">Stats</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-header__actions">
+          <button
+            type="button"
+            id="theme-toggle"
+            class="icon-button"
+            data-action="theme"
+            aria-label="Switch colour theme"
+            aria-pressed="false"
+            title="Switch theme (D)"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path
+                d="M12 3v2m0 14v2M4.2 4.2l1.4 1.4m12.8 12.8 1.4 1.4M3 12h2m14 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"
+              />
+              <circle cx="12" cy="12" r="4.2" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="hero__eyebrow">On-device · Private · No sign-up</p>
+        <h1 id="hero-title">
+          Smile, and we&rsquo;ll hand you a
+          <span class="hero__highlight">joke</span>.
+        </h1>
+        <p class="hero__lede">
+          SmileWeb watches your webcam <em>locally</em> to notice the moment you smile. Every smile
+          earns a brand-new joke from a hand-picked library of
+          <strong data-bind="total-jokes">10,000</strong> family-friendly one-liners, riddles and puns.
+        </p>
+        <p class="hero__cta">
+          <button type="button" class="button button--primary" id="start-button" data-action="start">
+            <span class="button__icon" aria-hidden="true">☺</span> Start smiling
+          </button>
+          <button type="button" class="button button--ghost" id="browse-button" data-action="browse">
+            Browse the jokes
+          </button>
+        </p>
+        <p class="hero__privacy">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="hero__privacy-icon">
+            <path d="M12 3 5 6v6c0 4.4 3 8.3 7 9 4-0.7 7-4.6 7-9V6l-7-3Z" />
+          </svg>
+          Camera frames never leave your device. Nothing is recorded, uploaded or tracked.
+          <a href="#privacy">How it works</a>
+        </p>
+      </section>
+
+      <section id="smile-station" class="mirror" aria-labelledby="mirror-title">
+        <header class="section-head">
+          <h2 id="mirror-title">The mirror</h2>
+          <p class="section-head__hint">
+            Allow the camera, look at the lens and grin. You can pause the tracking at any time.
+          </p>
+        </header>
+
+        <div class="mirror__grid">
+          <figure class="mirror__frame">
+            <div class="viewport" data-state="idle">
+              <video
+                id="camera"
+                class="viewport__video"
+                playsinline
+                muted
+                autoplay
+                aria-label="Live webcam preview"
+              ></video>
+              <canvas id="overlay" class="viewport__overlay" aria-hidden="true"></canvas>
+              <p class="viewport__badge" id="viewport-badge" hidden>
+                <span data-bind="badge-label">Camera off</span>
+              </p>
+              <p class="viewport__placeholder" data-placeholder>
+                <span class="viewport__emoji" aria-hidden="true">📷</span>
+                Your camera preview appears here
+              </p>
+            </div>
+            <figcaption class="mirror__caption">
+              <span class="visually-hidden">Status</span>
+              <output
+                id="status"
+                class="status"
+                data-state="idle"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                Camera is off. Press “Start smiling” to begin.
+              </output>
+            </figcaption>
+          </figure>
+
+          <div class="mirror__panel">
+            <div class="gauge" role="group" aria-labelledby="gauge-title">
+              <h3 id="gauge-title" class="gauge__title">Smile-o-meter</h3>
+              <div class="gauge__track">
+                <div
+                  class="gauge__fill"
+                  id="smile-meter"
+                  role="progressbar"
+                  aria-labelledby="gauge-title"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="0"
+                ></div>
+              </div>
+              <p class="gauge__readout">
+                <output id="smile-value" aria-live="off">0</output><span aria-hidden="true">%</span>
+                <span class="gauge__label" data-bind="smile-label">No smile detected</span>
+              </p>
+            </div>
+
+            <div class="mirror__controls">
+              <button type="button" class="button button--primary" data-action="start" id="start-button-2">
+                Start smiling
+              </button>
+              <button type="button" class="button" data-action="toggle-track" hidden id="pause-button">
+                Pause tracking
+              </button>
+              <button type="button" class="button button--ghost" data-action="stop" hidden id="stop-button">
+                Stop camera
+              </button>
+            </div>
+
+            <dl class="quick-stats">
+              <div class="quick-stat">
+                <dt>Smiles today</dt>
+                <dd><output id="stat-today">0</output></dd>
+              </div>
+              <div class="quick-stat">
+                <dt>Current streak</dt>
+                <dd><output id="stat-streak">0</output></dd>
+              </div>
+              <div class="quick-stat">
+                <dt>All-time smiles</dt>
+                <dd><output id="stat-total">0</output></dd>
+              </div>
+            </dl>
+
+            <p class="mirror__fallback" id="camera-fallback" hidden>
+              No camera? No problem.
+              <button type="button" class="link-button" data-action="fake-smile">
+                Pretend you smiled
+              </button>
+              and the jokes keep coming.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="joke-stage" class="stage" aria-labelledby="joke-title">
+        <header class="section-head">
+          <h2 id="joke-title">Your joke</h2>
+          <p class="section-head__hint">A fresh one every time you smile.</p>
+        </header>
+
+        <article class="joke-card" id="joke-card" data-empty="true">
+          <p class="joke-card__badge" id="joke-category">Welcome</p>
+          <blockquote class="joke-card__quote">
+            <p class="joke-card__setup" id="joke-setup">
+              Press “Start smiling”, then smile at your camera and your first joke will pop in right
+              here.
+            </p>
+            <p class="joke-card__punchline" id="joke-punchline" hidden></p>
+          </blockquote>
+          <p class="joke-card__meta">
+            <span class="joke-card__id" id="joke-id"></span>
+          </p>
+          <div class="joke-card__actions">
+            <button type="button" class="button" data-action="next-joke" title="Next joke (Space)">
+              Next joke
+            </button>
+            <button type="button" class="button" data-action="reveal" hidden id="reveal-button">
+              Show punchline
+            </button>
+            <button
+              type="button"
+              class="button button--ghost"
+              data-action="favorite"
+              aria-pressed="false"
+              id="favorite-button"
+            >
+              ♡ Save
+            </button>
+            <button type="button" class="button button--ghost" data-action="copy">Copy</button>
+            <button type="button" class="button button--ghost" data-action="share" hidden id="share-button">
+              Share
+            </button>
+          </div>
+        </article>
+
+        <p class="celebrate" id="celebrate" role="status" aria-live="assertive" aria-atomic="true"></p>
+      </section>
+
+      <section id="browse" class="browse" aria-labelledby="browse-title">
+        <header class="section-head">
+          <h2 id="browse-title">Browse the library</h2>
+          <p class="section-head__hint">
+            Search, filter by mood and save your favourites. Saved jokes stay on this device.
+          </p>
+        </header>
+
+        <form class="filters" id="filters" role="search" autocomplete="off">
+          <div class="field">
+            <label for="search-input">Search jokes</label>
+            <input
+              type="search"
+              id="search-input"
+              name="q"
+              placeholder="Try “chicken”, “robot”, “cheese”…"
+              enterkeyhint="search"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+          <div class="field">
+            <label for="category-select">Category</label>
+            <select id="category-select" name="category">
+              <option value="">All categories</option>
+            </select>
+          </div>
+          <div class="field field--checkbox">
+            <input type="checkbox" id="favorites-only" name="favorites" value="1" />
+            <label for="favorites-only">Show saved only</label>
+          </div>
+          <p class="filters__status" id="filters-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <ol class="joke-list" id="joke-list" aria-label="Joke results"></ol>
+        <p class="browse__more">
+          <button type="button" class="button" data-action="load-more" id="load-more" hidden>
+            Show more jokes
+          </button>
+          <button type="button" class="button button--ghost" data-action="shuffle-browse">
+            Shuffle
+          </button>
+        </p>
+      </section>
+
+      <section id="stats" class="stats" aria-labelledby="stats-title">
+        <header class="section-head">
+          <h2 id="stats-title">Your smile report</h2>
+          <p class="section-head__hint">Kept in your browser only — clear it whenever you like.</p>
+        </header>
+        <dl class="stats__grid">
+          <div class="stat-card">
+            <dt>Smiles today</dt>
+            <dd><output id="stats-today">0</output></dd>
+          </div>
+          <div class="stat-card">
+            <dt>Best streak</dt>
+            <dd><output id="stats-best-streak">0</output></dd>
+          </div>
+          <div class="stat-card">
+            <dt>Smiling for</dt>
+            <dd><output id="stats-duration">0s</output></dd>
+          </div>
+          <div class="stat-card">
+            <dt>All-time smiles</dt>
+            <dd><output id="stats-all-time">0</output></dd>
+          </div>
+          <div class="stat-card">
+            <dt>Jokes seen</dt>
+            <dd><output id="stats-seen">0</output></dd>
+          </div>
+          <div class="stat-card">
+            <dt>Saved jokes</dt>
+            <dd><output id="stats-favorites">0</output></dd>
+          </div>
+        </dl>
+        <p class="stats__actions">
+          <button type="button" class="button button--ghost" data-action="reset-stats">
+            Reset my stats
+          </button>
+        </p>
+      </section>
+
+      <section id="about" class="about" aria-labelledby="about-title">
+        <header class="section-head">
+          <h2 id="about-title">How SmileWeb works</h2>
+        </header>
+        <div class="about__grid">
+          <article class="about__card" id="privacy">
+            <h3>Privacy first</h3>
+            <p>
+              Smile detection runs entirely in your browser with WebAssembly. Video frames are drawn
+              to a canvas, measured, and thrown away. Nothing is recorded, stored or sent anywhere.
+              There are no accounts, no cookies for tracking, no analytics.
+            </p>
+          </article>
+          <article class="about__card">
+            <h3>How the smile is detected</h3>
+            <p>
+              A lightweight face-landmark model maps 478 points on your face. SmileWeb watches the
+              <em>mouth smile</em> blendshapes, smooths them over time and only reacts once your smile
+              is real and steady — so a cough or a frown never counts.
+            </p>
+          </article>
+          <article class="about__card">
+            <h3>Nice on slow devices</h3>
+            <p>
+              The detector is loaded lazily, the joke library streams in chunks, and rendering falls
+              back to a static preview whenever the GPU is busy or motion is reduced.
+            </p>
+          </article>
+          <article class="about__card">
+            <h3>Accessible by default</h3>
+            <p>
+              Keyboard shortcuts, screen-reader announcements, high-contrast support and a
+              reduced-motion mode are built in. You can always skip the camera and browse jokes
+              instead.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        SmileWeb · <span data-bind="total-jokes">10,000</span> jokes ·
+        <span data-bind="total-categories">12</span> categories ·
+        <a href="#about">About &amp; privacy</a>
+      </p>
+      <p class="site-footer__note">
+        Made for grins. Jokes are family-friendly and stored as static data.
+        <button type="button" class="link-button" data-action="open-info">Keyboard shortcuts</button>
+      </p>
+    </footer>
+
+    <dialog id="info-dialog" class="sheet" aria-labelledby="info-title">
+      <h2 id="info-title">Keyboard shortcuts &amp; tips</h2>
+      <dl class="shortcuts">
+        <dt><kbd>Space</kbd></dt>
+        <dd>Next joke</dd>
+        <dt><kbd>Enter</kbd></dt>
+        <dd>Reveal the punchline</dd>
+        <dt><kbd>S</kbd></dt>
+        <dd>Toggle smile tracking</dd>
+        <dt><kbd>F</kbd></dt>
+        <dd>Save / unsave the current joke</dd>
+        <dt><kbd>/</kbd></dt>
+        <dd>Jump to search</dd>
+        <dt><kbd>D</kbd></dt>
+        <dd>Switch light / dark theme</dd>
+        <dt><kbd>Esc</kbd></dt>
+        <dd>Close this dialog</dd>
+      </dl>
+      <form method="dialog">
+        <button class="button button--primary" type="submit">Got it</button>
+      </form>
+    </dialog>
+
+    <dialog id="consent-dialog" class="sheet" aria-labelledby="consent-title">
+      <h2 id="consent-title">Before we borrow your camera</h2>
+      <p>
+        SmileWeb needs a brief look through your webcam to see your smile. Here is exactly what
+        happens:
+      </p>
+      <ul class="consent__list">
+        <li>Frames are analysed <strong>on your device</strong> and immediately discarded.</li>
+        <li>Nothing is recorded, uploaded, or shared. Ever.</li>
+        <li>You can stop the camera at any moment with one click.</li>
+      </ul>
+      <form method="dialog" class="consent__actions">
+        <button class="button button--primary" type="submit" value="allow">Allow the camera</button>
+        <button class="button button--ghost" type="submit" value="skip" id="consent-skip">
+          Skip, just show jokes
+        </button>
+      </form>
+    </dialog>
+
+    <p class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+
+    <noscript>
+      <p class="noscript">
+        SmileWeb needs JavaScript for smile detection and the joke library. You can still read a
+        static sample of jokes in the page source.
+      </p>
+    </noscript>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

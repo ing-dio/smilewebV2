@@ -1,0 +1,33 @@
+{
+  "name": "smileweb",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SmileWeb - a privacy-first web app that watches for your smile through the webcam and rewards it with a fresh joke.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:jokes": "node tools/build-jokes.mjs",
+    "build:dadjokes": "node tools/data/fetch-dadjokes.mjs",
+    "build:icons": "node scripts/make-icons.mjs",
+    "build": "npm run build:dadjokes && npm run build:jokes && npm run build:icons",
+    "start": "node scripts/serve.mjs",
+    "dev": "node scripts/serve.mjs",
+    "test": "npm run test:unit && npm run test:e2e",
+    "pretest:e2e": "npm run build:jokes",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "lint": "oxlint .",
+    "verify": "node scripts/verify.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "jsdom": "^30.1.2",
+    "oxlint": "^1.0.0",
+    "vitest": "^5.0.4"
+  }
+}

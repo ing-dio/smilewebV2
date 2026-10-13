@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Test + tooling output
+test-results/
+playwright-report/
+coverage/
+*.tmp.mjs
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log

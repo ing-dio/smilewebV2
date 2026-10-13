@@ -1,0 +1,68 @@
+{
+  "name": "SmileWeb joke library",
+  "version": "1.0.0",
+  "target": 10000,
+  "total": 10411,
+  "categories": [
+    {
+      "id": "dad-jokes",
+      "name": "Dad Jokes",
+      "file": "jokes/dad-jokes.json",
+      "count": 1390
+    },
+    {
+      "id": "puns",
+      "name": "Puns",
+      "file": "jokes/puns.json",
+      "count": 1360
+    },
+    {
+      "id": "knock-knock",
+      "name": "Knock Knock",
+      "file": "jokes/knock-knock.json",
+      "count": 700
+    },
+    {
+      "id": "riddles",
+      "name": "Riddles",
+      "file": "jokes/riddles.json",
+      "count": 700
+    },
+    {
+      "id": "animal-antics",
+      "name": "Animal Antics",
+      "file": "jokes/animal-antics.json",
+      "count": 699
+    },
+    {
+      "id": "food-drink",
+      "name": "Food & Drink",
+      "file": "jokes/food-drink.json",
+      "count": 1400
+    },
+    {
+      "id": "tech-science",
+      "name": "Tech & Science",
+      "file": "jokes/tech-science.json",
+      "count": 1391
+    },
+    {
+      "id": "work-school",
+      "name": "Work & School",
+      "file": "jokes/work-school.json",
+      "count": 700
+    },
+    {
+      "id": "everyday-life",
+      "name": "Everyday Life",
+      "file": "jokes/everyday-life.json",
+      "count": 1393
+    },
+    {
+      "id": "classic-dad-jokes",
+      "name": "Classic Dad Jokes",
+      "file": "jokes/classic-dad-jokes.json",
+      "count": 678
+    }
+  ]
+}

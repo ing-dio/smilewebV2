@@ -1,0 +1,56 @@
+{
+  "name": "SmileWeb — smile and get a joke",
+  "short_name": "SmileWeb",
+  "description": "SmileWeb notices when you smile through your webcam and answers every smile with a fresh, family-friendly joke. Everything runs on your device.",
+  "id": "smileweb",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#fff8ec",
+  "theme_color": "#ffd166",
+  "categories": ["entertainment", "lifestyle", "utilities"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse jokes",
+      "short_name": "Browse",
+      "url": "./#browse",
+      "description": "Jump straight to the joke library"
+    },
+    {
+      "name": "Smile stats",
+      "short_name": "Stats",
+      "url": "./#stats",
+      "description": "See how much you have smiled"
+    }
+  ]
+}
