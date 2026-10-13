@@ -1,5 +1,7 @@
 # SmileWeb 😄
 
+HERE TO CHECK: https://6ace9b3683fff8e0b5cfe02c--smileweb2.netlify.app/
+
 Smile at your webcam and SmileWeb hands you a fresh, family-friendly joke.
 
 It is a **privacy-first, zero-build static site**: vanilla ES modules, no
